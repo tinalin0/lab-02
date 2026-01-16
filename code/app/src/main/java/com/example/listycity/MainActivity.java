@@ -46,29 +46,22 @@ public class MainActivity extends AppCompatActivity {
         String[] cities = {""};
         dataList = new ArrayList<>(Arrays.asList(cities));
 
-        cityAdapter = new ArrayAdapter<>(
-                this,
-                R.layout.content,
-                R.id.content_view,
-                dataList
+        cityAdapter = new ArrayAdapter<>(this, R.layout.content, R.id.content_view, dataList
         );
 
         cityList.setAdapter(cityAdapter);
 
-        // Select city
         cityList.setOnItemClickListener((parent, view, position, id) -> {
             selectedPosition = position;
         });
 
-        // add city
         btnAdd.setOnClickListener(v -> {
             editCity.setText("");
             editCity.requestFocus();
         });
 
-        // confirm
         btnConfirm.setOnClickListener(v -> {
-            String city = editCity.getText().toString().trim();
+            String city = editCity.getText().toString();
             if (!city.isEmpty()) {
                 dataList.add(city);
                 cityAdapter.notifyDataSetChanged();
@@ -76,7 +69,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        // delete city
         btnDelete.setOnClickListener(v -> {
             if (selectedPosition != -1) {
                 dataList.remove(selectedPosition);
